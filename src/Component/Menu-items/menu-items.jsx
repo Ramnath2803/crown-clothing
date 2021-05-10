@@ -1,20 +1,45 @@
 import React from "react";
 import "./menu-items.scss";
+import { withRouter } from "react-router-dom";
+import { sections } from "../Directory/directory.data";
 
-export const MenuItems = (props) => {
-  console.log(props.img);
+const MenuItems = ({ title, imageUrl, size, history, linkUrl, match }) => {
+  console.log({ title, imageUrl, size, history, linkUrl, match });
   return (
-    <div className="menu-item">
+    <div
+      className={`${size} menu-item`}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
       <div
         className="background-image"
-        style={{ backgroundImage: `url(${props.img})` }}
-      ></div>
+        style={{
+          backgroundImage: `url(${imageUrl})`,
+        }}
+      />
       <div className="content">
-        <h1 className="title">{props.title.toUpperCase()}</h1>
+        <h1 className="title">{title.toUpperCase()}</h1>
         <span className="subtitle">SHOP NOW</span>
       </div>
     </div>
   );
 };
 
-// export default MenuItems;
+// const MenuItems = ({ title, imageUrl, history, linkUrl, match }) => {
+//   return (
+//     <div
+//       className="menu-item"
+//       onClick={() => history.push(`${match.url}${linkUrl}`)}
+//     >
+//       <div
+//         className="background-image"
+//         style={{ backgroundImage: `url(${imageUrl})` }}
+//       ></div>
+//       <div className="content">
+//         <h1 className="title">{title.toUpperCase()}</h1>
+//         <span className="subtitle">SHOP NOW</span>
+//       </div>
+//     </div>
+//   );
+// };
+
+export default withRouter(MenuItems);
